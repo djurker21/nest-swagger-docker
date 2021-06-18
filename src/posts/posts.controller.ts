@@ -1,34 +1,42 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete } from '@nestjs/common';
-import { PostsService } from './posts.service';
-import { CreatePostDto } from './dto/create-post.dto';
-import { UpdatePostDto } from './dto/update-post.dto';
+import {
+  Body,
+  Controller,
+  Delete,
+  Get,
+  Param,
+  Patch,
+  Post,
+} from '@nestjs/common';
+import PostsService from './posts.service';
+import CreatePostDto from './dto/createPost.dto';
+import UpdatePostDto from './dto/updatePost.dto';
 
 @Controller('posts')
-export class PostsController {
+export default class PostsController {
   constructor(private readonly postsService: PostsService) {}
 
-  @Post()
-  create(@Body() createPostDto: CreatePostDto) {
-    return this.postsService.create(createPostDto);
-  }
-
   @Get()
-  findAll() {
-    return this.postsService.findAll();
+  getAllPosts() {
+    return this.postsService.getAllPosts();
   }
 
   @Get(':id')
-  findOne(@Param('id') id: string) {
-    return this.postsService.findOne(+id);
+  getPostById(@Param('id') id: string) {
+    return this.postsService.getPostById(Number(id));
+  }
+
+  @Post()
+  async createPost(@Body() post: CreatePostDto) {
+    return this.postsService.createPost(post);
   }
 
   @Patch(':id')
-  update(@Param('id') id: string, @Body() updatePostDto: UpdatePostDto) {
-    return this.postsService.update(+id, updatePostDto);
+  async updatePost(@Param('id') id: string, @Body() post: UpdatePostDto) {
+    return this.postsService.updatePost(Number(id), post);
   }
 
   @Delete(':id')
-  remove(@Param('id') id: string) {
-    return this.postsService.remove(+id);
+  async deletePost(@Param('id') id: string) {
+    return this.postsService.deletePost(Number(id));
   }
 }
