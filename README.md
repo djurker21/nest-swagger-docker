@@ -26,6 +26,25 @@
 
 [Nest](https://github.com/nestjs/nest) framework TypeScript app with Docker Typeorm Postgres Swagger.
 
+## Env
+
+docker.env
+
+POSTGRES_USER=admin
+POSTGRES_PASSWORD=admin
+POSTGRES_DB=nestjs
+PGADMIN_DEFAULT_EMAIL=admin@admin.com
+PGADMIN_DEFAULT_PASSWORD=admin
+
+.env
+
+POSTGRES_HOST=localhost
+POSTGRES_PORT=5432
+POSTGRES_USER=admin
+POSTGRES_PASSWORD=admin
+POSTGRES_DB=nestjs
+PORT=5000
+
 ## Installation
 
 ```bash
