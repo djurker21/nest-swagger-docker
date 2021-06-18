@@ -24,7 +24,9 @@
 
 ## Description
 
-[Nest](https://github.com/nestjs/nest) framework TypeScript app with Docker Typeorm Postgres Swagger.
+[Nest](https://github.com/nestjs/nest) framework TypeScript app with Docker Typeorm Postgres Pagination Swagger.
+
+http://localhost:5000/posts?page=1&limit=10
 
 ## Env
 
