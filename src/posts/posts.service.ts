@@ -4,6 +4,8 @@ import Post from './post.entity';
 import UpdatePostDto from './dto/updatePost.dto';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
+import { PaginationDto } from './dto/Pagination.dto';
+import { PaginatedPostsResultDto } from './dto/PaginatedPostsResult.dto';
 
 @Injectable()
 export default class PostsService {
@@ -12,8 +14,25 @@ export default class PostsService {
     private postsRepository: Repository<Post>,
   ) {}
 
-  getAllPosts() {
-    return this.postsRepository.find();
+  async getAllPosts(
+    paginationDto: PaginationDto,
+  ): Promise<PaginatedPostsResultDto> {
+    const skippedItems = (paginationDto.page - 1) * paginationDto.limit;
+
+    const totalCount = await this.postsRepository.count();
+    const products = await this.postsRepository
+      .createQueryBuilder()
+      .orderBy('createdAt', 'DESC')
+      .offset(skippedItems)
+      .limit(paginationDto.limit)
+      .getMany();
+
+    return {
+      totalCount,
+      page: paginationDto.page,
+      limit: paginationDto.limit,
+      data: products,
+    };
   }
 
   async getPostById(id: number) {
