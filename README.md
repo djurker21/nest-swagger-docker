@@ -24,7 +24,7 @@
 
 ## Description
 
-[Nest](https://github.com/nestjs/nest) framework TypeScript starter repository.
+[Nest](https://github.com/nestjs/nest) framework TypeScript app with Docker Typeorm Postgres Swagger.
 
 ## Installation
 
@@ -35,6 +35,9 @@ $ npm install
 ## Running the app
 
 ```bash
+# docker db
+$ docker-compose up
+
 # development
 $ npm run start
 
